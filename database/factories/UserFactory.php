@@ -3,6 +3,9 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
+use App\Role;
+use App\Post;
+use App\Photo;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -28,3 +31,35 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+ /* $factory->define(Post::class, function (Faker $faker) {
+    return [
+        'category_id' => $faker->nunberBetween(1,10),
+        'photo_id' => $faker->unique()->safeEmail,
+        'title'=>$faker->sentence(7,11),
+        'body' =>$faker->paragraphs(rand(10,15), true),
+        'slug' => $faker->slug()
+    ];
+}); 
+ */
+
+ /* $factory->define(Role::class, function (Faker $faker) {
+    return [
+        'name'=> $faker->randomElement(['administrator', 'author', 'subscriber']),
+    ];
+}); 
+ */
+
+  /* $factory->define(Category::class, function (Faker $faker) {
+    return [
+        'name'=> $faker->randomElement(['PHP', 'Programing', 'Javascript', 'Life', 'Travel', 'Cofee']),
+    ];
+}); 
+ */
+
+ /* $factory->define(Photo::class, function (Faker $faker) {
+    return [
+        'file'=> 'placeholder.jpg'
+    ];
+}); 
+ */
