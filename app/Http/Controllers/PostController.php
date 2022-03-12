@@ -19,6 +19,20 @@ class PostController extends Controller
 
     public function store()
     {
-        dd(request()->all());
+     /*    dd(request()->all());  return empty collection*/
+
+        $inputs = request()->validate([
+            'title' => 'required|min:8|max:225',           //key will be from name attribute value
+            'post_image' => 'file',  //mimes|jpeg,bmp,png
+            'body'=> 'required'
+        ]);
+            if(request('post_image')){
+                $inputs['post_image'] = request('post_image')->store('images');
+            }
+
+            auth()->user()->posts()->create($inputs);
+
+            return back();
+
     }
 }
