@@ -12,7 +12,7 @@ class PostController extends Controller
     {
        $posts = Post::all();
        return view ('admin.posts.index', ['posts'=>$posts]);
-       
+
     }
 
     public function show(Post $post)   //inject a class, Post class and $post object
@@ -40,7 +40,18 @@ class PostController extends Controller
 
             auth()->user()->posts()->create($inputs);
 
-            return back();
+            session()->flash('post-created-message', 'Post with title was created' . $inputs['title'] );
 
+            return redirect()->route('post.index');
+
+    }
+
+    public function destroy(Post $post, Request $request)
+    {
+       $post->delete();
+
+       $request->session()->flash('message', 'Post was deleted');
+
+       return back();
     }
 }
