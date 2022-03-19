@@ -46,6 +46,13 @@ class PostController extends Controller
 
     }
 
+    public function edit(Post $post)
+    {
+       
+       return view ('admin.posts.edit', ['post' => $post]);
+
+    }
+
     public function destroy(Post $post, Request $request)
     {
        $post->delete();
