@@ -13,4 +13,14 @@ class Post extends Model
    {
        return $this->belongsTo(User::class);  //each post has user
    }
+
+  /*  public function setPostImageAttribute($value)  //mutators
+   {
+         $this->attributes['post_image'] = asset($value);
+   } */
+
+   public function getPostImageAttributes($value) //accesors
+   {
+      return asset($value);
+   }
 }
