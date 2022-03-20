@@ -8,6 +8,8 @@
 
       @elseif(session('post-created-message'))
       <div class="alert alert-success">{{session('post-created-message')}}</div>
+      @elseif(session('post-updated-message'))
+      <div class="alert alert-success">{{session('post-updated-message')}}</div>
     @endif
 
   <div class="card shadow mb-4">
@@ -43,8 +45,8 @@
                       @foreach($posts as $post)
                       <tr>
                         <td>{{$post->id}}</td>
+                        <td>{{$post->user->name}}</td>
                         <td><a href="{{route('post.edit', $post->id)}}">{{$post->title}}></a></td>
-                        <td>{{$post->title}}</td>
                         <td>
                           <img height="40px" src="{{$post->post_image}}" alt="">
                         </td>

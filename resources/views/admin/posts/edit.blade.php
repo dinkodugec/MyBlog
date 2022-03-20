@@ -4,8 +4,9 @@
 
 <h1>Edit A Post</h1>
 
-<form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('post.update', $post->id)}}" method="post" enctype="multipart/form-data">
 @csrf <!--  Cross-site request forgeries are a type of malicious exploit whereby unauthorized commands are performed on behalf of an authenticated user -->
+@method('PATCH')
 <div class="form-group">
   <label for="title">Title</label>
   <input type="text" 
