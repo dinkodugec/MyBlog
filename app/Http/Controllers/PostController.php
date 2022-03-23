@@ -10,7 +10,7 @@ class PostController extends Controller
 
     public function index()
     {
-       $posts = Post::all();
+       $posts = auth()->user()->posts;
        return view ('admin.posts.index', ['posts'=>$posts]);
 
     }
@@ -22,12 +22,15 @@ class PostController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Post::class);
+
         return view('admin.posts.create');
     }
 
     public function store()
     {
      /*    dd(request()->all());  return empty collection*/
+        $this->authorize('create', Post::class);
 
         $inputs = request()->validate([
             'title' => 'required|min:8|max:225',           //key will be from name attribute value
@@ -48,10 +51,10 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-    //    $this->authorize('view', $post);  //visibility only authorize user
+    $this->authorize('view', $post);  //visibility only authorize user
 
     if(auth()->user()->can('view', $post)){
-        
+
     }
 
        return view ('admin.posts.edit', ['post' => $post]);
@@ -60,6 +63,8 @@ class PostController extends Controller
 
     public function destroy(Post $post, Request $request)
     {
+        $this->authorize('delete', $post);
+
        $post->delete();
 
        $request->session()->flash('message', 'Post was deleted');
