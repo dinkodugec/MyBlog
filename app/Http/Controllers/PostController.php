@@ -48,7 +48,12 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-       
+    //    $this->authorize('view', $post);  //visibility only authorize user
+
+    if(auth()->user()->can('view', $post)){
+        
+    }
+
        return view ('admin.posts.edit', ['post' => $post]);
 
     }
@@ -78,6 +83,8 @@ class PostController extends Controller
 
             $post->title = $inputs['title'];
             $post->body = $inputs['body'];
+
+            $this->authorize('update', $post);
 
         $post->save(); 
       
