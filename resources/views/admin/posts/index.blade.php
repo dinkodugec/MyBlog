@@ -44,13 +44,13 @@
               <td>{{$post->updated_at->diffForHumans()}}</td>
               <td>
 
-                <!-- @can('view', $post) -->
+                 @can('view', $post)
                 <form method="post" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data">
                   @csrf
                   @method('DELETE')
                   <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-                <!-- @endcan -->
+                @endcan
               </td>
             </tr>
             @endforeach
@@ -60,6 +60,7 @@
     </div>
   </div>
 
+  {{ $posts->links() }}  {{-- pagination --}}
   @endsection
 
   @section('scripts')

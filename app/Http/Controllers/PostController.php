@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 
+
 class PostController extends Controller
 {
 
     public function index()
     {
-       $posts = auth()->user()->posts;
+        $posts = auth()->user()->posts()->paginate(2);
+   /*    $posts = Post::all(); */
        return view ('admin.posts.index', ['posts'=>$posts]);
 
     }
@@ -49,7 +51,7 @@ class PostController extends Controller
             return redirect()->route('post.index');
 
 
-            
+
 
     }
 
@@ -57,9 +59,9 @@ class PostController extends Controller
     {
     $this->authorize('view', $post);  //visibility only authorize user
 
-    if(auth()->user()->can('view', $post)){
+   /*  if(auth()->user()->can('view', $post)){
 
-    }
+    } */
 
        return view ('admin.posts.edit', ['post' => $post]);
 
@@ -83,7 +85,7 @@ class PostController extends Controller
             'post_image' => 'file',  //mimes|jpeg,bmp,png
             'body'=> 'required'
         ]);
-        
+
 
             if(request('post_image')){
                 $inputs['post_image'] = request('post_image')->store('images');
@@ -95,8 +97,8 @@ class PostController extends Controller
 
             $this->authorize('update', $post);
 
-        $post->save(); 
-      
+        $post->save();
+
         session()->flash('post-updated-message', 'Post with title was updated' . $inputs['title'] );
 
         return redirect()->route('post.index');
