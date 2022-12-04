@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  {{ $posts->links() }}  {{-- pagination --}}
+ {{--  {{ $posts->links() }}   --}}{{-- pagination --}}
   @endsection
 
   @section('scripts')
